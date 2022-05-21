@@ -48,8 +48,7 @@ add_my_fruit = streamlit.text_input('What fruit would you like to add', 'jackfru
 streamlit.write('Second fruit is:', add_my_fruit)
 import requests
 fruityvice_response2 = requests.get("https://fruityvice.com/api/fruit/" + add_my_fruit)
-#streamlit.text(fruityvice_response.json()) #just writes the data to the screen
-#take the json version of the response and normalize it
 fruityvice_normalized2 = pandas.json_normalize(fruityvice_response2.json())
-#output it to the screen as a table
 streamlit.dataframe(fruityvice_normalized2)
+
+my_cur.execute("insert into fruit_load_list values ('from streamlit')")
