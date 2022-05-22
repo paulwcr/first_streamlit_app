@@ -39,7 +39,7 @@ try:
  except URLError as e:
   streamlit.error()
   
-  streamlit.write('The User entered', fruit_choice)
+streamlit.write('The User entered', fruit_choice)
 
 #import requests
 
