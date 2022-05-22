@@ -74,11 +74,19 @@ if streamlit.button('Get Fruit Load List'):
 streamlit.stop()
 
 #allow the end user to add another fruit to the list 
-add_my_fruit = streamlit.text_input('would you like to add', 'jackfruit')
-streamlit.write('Second fruit is:', add_my_fruit)
+def insert_row_snowflake(new_fruit):
+ with my_cnx.cursor() as my_cur:
+  my_cur.execute("insert into fruit_load_list values ('from streamlit')")
+  retun "Thanks for adding " + new_fruit
+add_my_fruit = streamlit.text_input('What would you like to add')
+if streamlit.button('Add a fruit to the list'):
+ my_cnx = snowflake.connector.connect(**streamlit.secrets["snowflake"])
+ back_from_function = insert_row_snowflake(add_my_fruit)
+ streamlit.texy(back_from_funciton)
+#streamlit.write('Second fruit is:', add_my_fruit)
 
 fruityvice_response2 = requests.get("https://fruityvice.com/api/fruit/" + add_my_fruit)
 fruityvice_normalized2 = pandas.json_normalize(fruityvice_response2.json())
 streamlit.dataframe(fruityvice_normalized2)
 
-my_cur.execute("insert into fruit_load_list values ('from streamlit')")
+
